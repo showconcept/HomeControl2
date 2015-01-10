@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 import com.google.gson.JsonObject;
 
 import de.android.freso.homecontrol2.FhemServer;
+import de.android.freso.homecontrol2.MainActivity;
 import de.android.freso.homecontrol2.R;
 
 /**
@@ -20,10 +22,12 @@ import de.android.freso.homecontrol2.R;
 public class FRM_RGB extends FhemDevice {
 
     private String colorString;
+    private FrameLayout layoutColor;
+    private MainActivity mainActivity;
 
     public FRM_RGB(JsonObject object, FhemServer server, Context context) {
         super(object, server, context);
-
+        mainActivity = (MainActivity) context;
         colorString = internals.get("STATE").getAsString();
     }
 
@@ -32,16 +36,19 @@ public class FRM_RGB extends FhemDevice {
         View v = inflater.inflate(R.layout.frm_rgb_layout, null);
 
         TextView tvName = (TextView) v.findViewById(R.id.tv_name);
-        final Button btnColor1 = (Button) v.findViewById(R.id.btnColor1);
+        Button btnColor1 = (Button) v.findViewById(R.id.btnColor1);
         Button btnColor2 = (Button) v.findViewById(R.id.btnColor2);
         Button btnColor3 = (Button) v.findViewById(R.id.btnColor3);
         Button btnColor4 = (Button) v.findViewById(R.id.btnColor4);
         Button btnAus = (Button) v.findViewById(R.id.btn_aus);
-        final SeekBar seekRot = (SeekBar) v.findViewById(R.id.seekBar_rot);
-        final SeekBar seekGruen = (SeekBar) v.findViewById(R.id.seekBar_gruen);
-        final SeekBar seekBlau = (SeekBar) v.findViewById(R.id.seekBar_blau);
+        SeekBar seekRot = (SeekBar) v.findViewById(R.id.seekBar_rot);
+        SeekBar seekGruen = (SeekBar) v.findViewById(R.id.seekBar_gruen);
+        SeekBar seekBlau = (SeekBar) v.findViewById(R.id.seekBar_blau);
+        layoutColor = (FrameLayout) v.findViewById(R.id.layoutColor);
 
         int colorInt = Color.parseColor("#"+colorString);
+        layoutColor.setBackgroundColor(colorInt);
+
         seekRot.setProgress(Color.red(colorInt));
         seekGruen.setProgress(Color.green(colorInt));
         seekBlau.setProgress(Color.blue(colorInt));
@@ -50,6 +57,7 @@ public class FRM_RGB extends FhemDevice {
             @Override
             public void onClick(View v) {
                 server.sendeBefehl(server, "set " + getName() + " rgb D00366");
+                mainActivity.viewAktualisieren();
             }
         });
 
@@ -57,6 +65,7 @@ public class FRM_RGB extends FhemDevice {
             @Override
             public void onClick(View v) {
                 server.sendeBefehl(server, "set " + getName() + " rgb 03CAD0");
+                mainActivity.viewAktualisieren();
             }
         });
 
@@ -64,6 +73,7 @@ public class FRM_RGB extends FhemDevice {
             @Override
             public void onClick(View v) {
                 server.sendeBefehl(server, "set " + getName() + " rgb 5A08FD");
+                mainActivity.viewAktualisieren();
             }
         });
 
@@ -71,6 +81,7 @@ public class FRM_RGB extends FhemDevice {
             @Override
             public void onClick(View v) {
                 server.sendeBefehl(server, "set " + getName() + " rgb 3CCE5E");
+                mainActivity.viewAktualisieren();
             }
         });
 
@@ -78,6 +89,7 @@ public class FRM_RGB extends FhemDevice {
             @Override
             public void onClick(View v) {
                 server.sendeBefehl(server, "set " + getName() + " off");
+                mainActivity.viewAktualisieren();
             }
         });
 
@@ -93,6 +105,8 @@ public class FRM_RGB extends FhemDevice {
 
     private String colorBerechnen(int rot, int gruen, int blau) {
         String farbeString = String.format("%02x%02x%02x", rot, gruen, blau);
+        int colorInt = Color.parseColor("#"+farbeString);
+        layoutColor.setBackgroundColor(colorInt);
         //Toast.makeText(context, farbeString, Toast.LENGTH_LONG).show();
 
         return farbeString;

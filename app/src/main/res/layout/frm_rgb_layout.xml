@@ -64,6 +64,12 @@
             android:progress="0"
             android:indeterminate="false" />
 
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="#3CCE5E"
+            android:id="@+id/layoutColor"></FrameLayout>
+
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"

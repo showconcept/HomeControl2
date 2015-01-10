@@ -36,18 +36,22 @@ public class MainActivity extends ActionBarActivity {
         aktualisieren.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ArrayList<FhemDevice> list = server.getAllDevices();
-
-                content.removeAllViewsInLayout();
-
-                for(int i=0; i < list.size(); i++) {
-                    FhemDevice device = list.get(i);
-                    content.addView(device.getView(getLayoutInflater()));
-                }
+                viewAktualisieren();
             }
         });
 
 
+    }
+
+    public void viewAktualisieren() {
+        ArrayList<FhemDevice> list = server.getAllDevices();
+
+        content.removeAllViewsInLayout();
+
+        for(int i=0; i < list.size(); i++) {
+            FhemDevice device = list.get(i);
+            content.addView(device.getView(getLayoutInflater()));
+        }
     }
 
 
