@@ -46,11 +46,13 @@ public class MainActivity extends ActionBarActivity {
     public void viewAktualisieren() {
         ArrayList<FhemDevice> list = server.getAllDevices();
 
-        content.removeAllViewsInLayout();
+        //content.removeAllViewsInLayout();
+        content.removeAllViews();
 
         for(int i=0; i < list.size(); i++) {
             FhemDevice device = list.get(i);
-            content.addView(device.getView(getLayoutInflater()));
+            //content.addView(device.getView(getLayoutInflater()));
+            content.addView(device.getCard(getLayoutInflater()));
         }
     }
 

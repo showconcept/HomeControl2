@@ -2,138 +2,148 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/relativeLayout"
-    android:background="@android:drawable/alert_light_frame">
+    android:id="@+id/relativeLayout">
 
     <LinearLayout
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/linearLayout">
 
-        <TextView
+        <com.larswerkman.holocolorpicker.ColorPicker
+            android:id="@+id/colorPicker"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Dies ist mein Name"
-            android:id="@+id/tv_name"
-            android:layout_marginBottom="15dp" />
+            android:layout_height="150dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="rot"
-            android:id="@+id/tv_rot" />
-
-        <SeekBar
+        <GridLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/seekBar_rot"
-            android:indeterminate="false"
-            android:max="255"
-            android:progress="0" />
+            android:columnCount="3"
+            android:rowCount="2"
+            android:useDefaultMargins="false"
+            android:id="@+id/grid_color_buttons"
+            android:layout_gravity="center_vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="grün"
-            android:id="@+id/tv_gruen" />
-
-        <SeekBar
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/seekBar_gruen"
-            android:indeterminate="false"
-            android:max="255"
-            android:progress="0" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="blau"
-            android:id="@+id/tv_blau" />
-
-        <SeekBar
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/seekBar_blau"
-            android:max="255"
-            android:progress="0"
-            android:indeterminate="false" />
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:background="#3CCE5E"
-            android:id="@+id/layoutColor"></FrameLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:gravity="center_horizontal">
-
-            <Button
-                style="?android:attr/buttonStyleSmall"
+            <FrameLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/btnColor1"
-                android:background="#D00366"
-                android:text="1"
-                android:layout_marginRight="10dp" />
+                android:layout_column="0"
+                android:layout_row="0"
+                android:layout_columnWeight="1"
+                android:id="@+id/frame_1">
 
-            <Button
-                style="?android:attr/buttonStyleSmall"
+                <view
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    class="at.markushi.ui.CircleButton"
+                    android:id="@+id/btn_color_1"
+                    android:layout_row="0"
+                    android:layout_column="0"
+                    android:src="@drawable/ic_action_tick"
+                    android:layout_columnWeight="1"
+                    android:clickable="true" />
+            </FrameLayout>
+
+            <FrameLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="2"
-                android:id="@+id/btnColor2"
-                android:background="#03CAD0"
-                android:layout_marginRight="10dp" />
+                android:layout_column="1"
+                android:layout_row="0"
+                android:layout_columnWeight="1"
+                android:id="@+id/frame_2">
 
-            <Button
-                style="?android:attr/buttonStyleSmall"
+                <view
+                    class="at.markushi.ui.CircleButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btn_color_2"
+                    android:layout_row="0"
+                    android:layout_column="1"
+                    android:src="@drawable/ic_action_tick"
+                    android:layout_columnWeight="1"
+                    android:clickable="true" />
+            </FrameLayout>
+
+            <FrameLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="3"
-                android:id="@+id/btnColor3"
-                android:background="#5A08FD"
-                android:layout_marginRight="10dp" />
+                android:layout_column="2"
+                android:layout_row="0"
+                android:layout_columnWeight="1"
+                android:id="@+id/frame_3">
 
-            <Button
-                style="?android:attr/buttonStyleSmall"
+                <view
+                    class="at.markushi.ui.CircleButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btn_color_3"
+                    android:layout_row="0"
+                    android:layout_column="2"
+                    android:src="@drawable/ic_action_tick"
+                    android:layout_columnWeight="1"
+                    android:clickable="true" />
+            </FrameLayout>
+
+            <FrameLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="4"
-                android:id="@+id/btnColor4"
-                android:background="#3CCE5E" />
+                android:layout_column="0"
+                android:layout_row="1"
+                android:layout_columnWeight="1"
+                android:id="@+id/frame_4">
 
-        </LinearLayout>
+                <view
+                    class="at.markushi.ui.CircleButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btn_color_4"
+                    android:layout_row="1"
+                    android:layout_column="0"
+                    android:src="@drawable/ic_action_tick"
+                    android:layout_columnWeight="1"
+                    android:clickable="true" />
+            </FrameLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="intensität"
-            android:id="@+id/tv_intensitaet" />
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:layout_row="1"
+                android:layout_columnWeight="1"
+                android:id="@+id/frame_5">
 
-        <SeekBar
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/seekBar_intens"
-            android:max="100"
-            android:progress="100"
-            android:indeterminate="false" />
+                <view
+                    class="at.markushi.ui.CircleButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btn_color_5"
+                    android:layout_row="1"
+                    android:layout_column="1"
+                    android:src="@drawable/ic_action_tick"
+                    android:layout_columnWeight="1"
+                    android:clickable="true" />
+            </FrameLayout>
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="AUS"
-            android:id="@+id/btn_aus"
-            android:layout_gravity="center_horizontal" />
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="2"
+                android:layout_columnWeight="1"
+                android:layout_row="1"
+                android:id="@+id/frame_6">
+
+                <view
+                    class="at.markushi.ui.CircleButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btn_color_6"
+                    android:layout_row="1"
+                    android:layout_column="2"
+                    android:src="@drawable/ic_action_tick"
+                    android:layout_columnWeight="1"
+                    android:clickable="true" />
+            </FrameLayout>
+        </GridLayout>
+
     </LinearLayout>
 </RelativeLayout>

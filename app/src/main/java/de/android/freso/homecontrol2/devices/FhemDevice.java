@@ -35,4 +35,6 @@ public abstract class FhemDevice {
     }
 
     public abstract View getView(LayoutInflater inflater);
+
+    public abstract View getCard(LayoutInflater inflater);
 }
