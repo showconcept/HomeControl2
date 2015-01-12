@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:title="Als Standard speichern"
+        android:id="@+id/menu_card_frm_rgb_standard"/>
+
+    <item
+        android:title="Zeitschaltuhr"
+        android:id="@+id/menu_card_frm_rgb_zeitschaltuhr"/>
+</menu>

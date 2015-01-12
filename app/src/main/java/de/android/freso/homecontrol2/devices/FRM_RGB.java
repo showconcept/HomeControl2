@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
@@ -20,6 +21,7 @@ import de.android.freso.homecontrol2.MainActivity;
 import de.android.freso.homecontrol2.R;
 import it.gmariotti.cardslib.library.internal.Card;
 import it.gmariotti.cardslib.library.internal.CardHeader;
+import it.gmariotti.cardslib.library.internal.base.BaseCard;
 import it.gmariotti.cardslib.library.view.CardView;
 
 /**
@@ -37,6 +39,7 @@ public class FRM_RGB extends FhemDevice {
     private String colorString;
     private FrameLayout layoutColor;
     private MainActivity mainActivity;
+    private ColorPicker colorPicker;
 
     public FRM_RGB(JsonObject object, FhemServer server, Context context) {
         super(object, server, context);
@@ -82,11 +85,15 @@ public class FRM_RGB extends FhemDevice {
     }
 
     private void colorSenden(int color) {
+        server.sendeBefehl(server, "set " + getName() + " rgb " + getFhemColorString(color));
+    }
+
+    private String getFhemColorString(int color) {
         int rot = Color.red(color);
         int gruen = Color.green(color);
         int blau = Color.blue(color);
         String colorString = String.format("%02x%02x%02x", rot, gruen, blau);
-        server.sendeBefehl(server, "set " + getName() + " rgb " + colorString);
+        return colorString;
     }
 
     private void fillView(GridLayout grid) {
@@ -126,12 +133,27 @@ public class FRM_RGB extends FhemDevice {
         card.setInnerLayout(R.layout.frm_rgb_layout);
 
         header.setTitle(getName());
+        header.setPopupMenu(R.menu.menu_card_frm_rgb, new CardHeader.OnClickCardHeaderPopupMenuListener() {
+            @Override
+            public void onMenuItemClick(BaseCard baseCard, MenuItem menuItem) {
+                switch (menuItem.getItemId()) {
+                    case R.id.menu_card_frm_rgb_standard:
+                        server.sendeBefehl(server, "attr " + getName() + " comment " + getFhemColorString(colorPicker.getColor()));
+                        colorPicker.setOldCenterColor(colorPicker.getColor());
+                        Toast.makeText(context, "Als Standard gespeichert", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.menu_card_frm_rgb_zeitschaltuhr:
+
+                        break;
+                }
+            }
+        });
         cardView.setCard(card);
 
 
         final View v2 = cardView.getInternalContentLayout();
         final GridLayout grid_color_buttons = (GridLayout) v2.findViewById(R.id.grid_color_buttons);
-        final ColorPicker colorPicker = (ColorPicker) v2.findViewById(R.id.colorPicker);
+        colorPicker = (ColorPicker) v2.findViewById(R.id.colorPicker);
         final ValueBar valueBar = (ValueBar) v2.findViewById(R.id.valueBar);
         final CircleButton btnColor1 = (CircleButton) v2.findViewById(R.id.btn_color_1);
         final CircleButton btnColor2 = (CircleButton) v2.findViewById(R.id.btn_color_2);
