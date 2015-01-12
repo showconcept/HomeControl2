@@ -116,7 +116,7 @@ public class FRM_RGB extends FhemDevice {
 
 
     public View getCard(LayoutInflater inflater) {
-        View v = inflater.inflate(R.layout.cardview, null);
+        View v = inflater.inflate(R.layout.cardviews, null);
 
         Card card = new Card(context);
         CardHeader header = new CardHeader(context);
