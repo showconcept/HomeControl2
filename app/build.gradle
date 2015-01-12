@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-
 android {
     compileSdkVersion 21
     buildToolsVersion "21.1.2"
@@ -18,7 +17,6 @@ android {
         }
     }
 }
-
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:21.0.3'
@@ -31,3 +29,4 @@ dependencies {
     compile 'com.larswerkman:HoloColorPicker:1.4'
     compile 'com.github.markushi:circlebutton:1.1'
 }
+
