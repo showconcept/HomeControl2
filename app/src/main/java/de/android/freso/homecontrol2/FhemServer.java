@@ -2,6 +2,7 @@ package de.android.freso.homecontrol2;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.widget.Switch;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -20,11 +21,13 @@ import org.apache.http.util.EntityUtils;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-import de.android.freso.homecontrol2.devices.FRM_RGB;
-import de.android.freso.homecontrol2.devices.FhemDevice;
+import de.android.freso.homecontrol2.modules.AT;
+import de.android.freso.homecontrol2.modules.FRM_RGB;
+import de.android.freso.homecontrol2.modules.FhemModul;
 
 /**
  * Created by Patrick on 15.12.2014.
@@ -91,8 +94,8 @@ public class FhemServer {
     }
 
 
-    public ArrayList<FhemDevice> getAllDevices() {
-        ArrayList<FhemDevice> list = new ArrayList<FhemDevice>();
+    public HashMap<String, FhemModul> getAllDevices() {
+        HashMap<String, FhemModul> map = new HashMap<String, FhemModul>();
         String responseString = sendeBefehl(this, "jsonlist2");
         Gson gson = new GsonBuilder().create();
 
@@ -104,12 +107,19 @@ public class FhemServer {
             JsonObject attr = results.get(i).getAsJsonObject().get("Attributes").getAsJsonObject();
             String type = internals.get("TYPE").getAsString();
 
-            if(type.equals("FRM_RGB")) {
-                FRM_RGB device = new FRM_RGB(results.get(i).getAsJsonObject(), this, context);
-                list.add(device);
+            switch(type) {
+                case "FRM_RGB":
+                    FRM_RGB frmRgb_device = new FRM_RGB(results.get(i).getAsJsonObject(), this, context);
+                    map.put(frmRgb_device.getName(), frmRgb_device);
+                    break;
+                case "at":
+                    AT at_device = new AT(results.get(i).getAsJsonObject(),this,context);
+                    map.put(at_device.getName(), at_device);
+                    break;
+
             }
         }
 
-        return list;
+        return map;
     }
 }

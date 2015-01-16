@@ -1,6 +1,7 @@
-package de.android.freso.homecontrol2.devices;
+package de.android.freso.homecontrol2.modules;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -19,6 +20,7 @@ import at.markushi.ui.CircleButton;
 import de.android.freso.homecontrol2.FhemServer;
 import de.android.freso.homecontrol2.MainActivity;
 import de.android.freso.homecontrol2.R;
+import de.android.freso.homecontrol2.ZeitschaltuhrActivity;
 import it.gmariotti.cardslib.library.internal.Card;
 import it.gmariotti.cardslib.library.internal.CardHeader;
 import it.gmariotti.cardslib.library.internal.base.BaseCard;
@@ -27,7 +29,7 @@ import it.gmariotti.cardslib.library.view.CardView;
 /**
  * Created by Patrick on 08.01.2015.
  */
-public class FRM_RGB extends FhemDevice {
+public class FRM_RGB extends FhemModul {
 
     private static final String KEY_COLOR_1 = "settings_frm_rgb_color1";
     private static final String KEY_COLOR_2 = "settings_frm_rgb_color2";
@@ -140,10 +142,11 @@ public class FRM_RGB extends FhemDevice {
                     case R.id.menu_card_frm_rgb_standard:
                         server.sendeBefehl(server, "attr " + getName() + " comment " + getFhemColorString(colorPicker.getColor()));
                         colorPicker.setOldCenterColor(colorPicker.getColor());
+                        server.sendeBefehl(server, "save");
                         Toast.makeText(context, "Als Standard gespeichert", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.menu_card_frm_rgb_zeitschaltuhr:
-
+                        context.startActivity(new Intent(context, ZeitschaltuhrActivity.class));
                         break;
                 }
             }

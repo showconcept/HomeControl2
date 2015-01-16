@@ -28,6 +28,7 @@ dependencies {
     compile 'com.github.gabrielemariotti.cards:cardslib-extra-dragdrop:2.0.1'
     compile 'com.larswerkman:HoloColorPicker:1.4'
     compile 'com.github.markushi:circlebutton:1.1'
+    compile(group: 'com.github.navasmdc', name: 'MaterialDesign', version: '1.0', ext: 'aar')
 }
 
 

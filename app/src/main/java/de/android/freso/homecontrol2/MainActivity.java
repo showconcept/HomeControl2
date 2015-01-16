@@ -1,20 +1,23 @@
 package de.android.freso.homecontrol2;
 
-import android.graphics.Color;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.text.method.CharacterPickerDialog;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.SeekBar;
+import android.widget.Toast;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
-import de.android.freso.homecontrol2.devices.FhemDevice;
+import de.android.freso.homecontrol2.helper.CommandHelper;
+import de.android.freso.homecontrol2.modules.FhemModul;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -44,16 +47,23 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void viewAktualisieren() {
-        ArrayList<FhemDevice> list = server.getAllDevices();
+        HashMap<String, FhemModul> list = server.getAllDevices();
+        Object[] set = list.keySet().toArray();
+
 
         //content.removeAllViewsInLayout();
         content.removeAllViews();
 
-        for(int i=0; i < list.size(); i++) {
-            FhemDevice device = list.get(i);
+        for(int i=0; i < set.length; i++) {
+            FhemModul device = list.get(set[i].toString());
             //content.addView(device.getView(getLayoutInflater()));
-            content.addView(device.getCard(getLayoutInflater()));
+            if(device.getCard(getLayoutInflater()) != null) {
+                content.addView(device.getCard(getLayoutInflater()));
+            }
+            Log.d("Aktualisieren", set[i].toString());
         }
+
+        CommandHelper.parse(list);
     }
 
 
