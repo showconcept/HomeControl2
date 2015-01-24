@@ -28,7 +28,12 @@ public class AT extends FhemModul {
     }
 
     @Override
-    public View getCard(LayoutInflater inflater) {
+    public View getDetailView(LayoutInflater inflater) {
+        return null;
+    }
+
+    @Override
+    public View getOverView(LayoutInflater inflater) {
         return null;
     }
 

@@ -51,5 +51,7 @@ public abstract class FhemModul {
 
     public abstract View getView(LayoutInflater inflater);
 
-    public abstract View getCard(LayoutInflater inflater);
+    public abstract View getDetailView(LayoutInflater inflater);
+
+    public abstract View getOverView(LayoutInflater inflater);
 }

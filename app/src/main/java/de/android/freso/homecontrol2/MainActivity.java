@@ -1,7 +1,7 @@
 package de.android.freso.homecontrol2;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -10,19 +10,14 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
 
-import de.android.freso.homecontrol2.helper.CommandHelper;
 import de.android.freso.homecontrol2.modules.FhemModul;
 
 
 public class MainActivity extends ActionBarActivity {
 
-    private LinearLayout content;
+    private LinearLayout content, row1, row2;
     private Button aktualisieren;
     private FhemServer server;
 
@@ -32,6 +27,8 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
         content = (LinearLayout) findViewById(R.id.content);
+        row1 = (LinearLayout) findViewById(R.id.row1);
+        row2 = (LinearLayout) findViewById(R.id.row2);
         aktualisieren = (Button) findViewById(R.id.btn_aktualisieren);
 
         server = new FhemServer("192.168.178.20", 8083, this);
@@ -52,18 +49,27 @@ public class MainActivity extends ActionBarActivity {
 
 
         //content.removeAllViewsInLayout();
-        content.removeAllViews();
+        //content.removeAllViews();
+        row1.removeAllViews();
+        row2.removeAllViews();
 
         for(int i=0; i < set.length; i++) {
             FhemModul device = list.get(set[i].toString());
-            //content.addView(device.getView(getLayoutInflater()));
-            if(device.getCard(getLayoutInflater()) != null) {
-                content.addView(device.getCard(getLayoutInflater()));
+            //content.addView(device.getDetailView(getLayoutInflater()));
+            if(device.getOverView(getLayoutInflater()) != null) {
+                //content.addView(device.getOverView(getLayoutInflater()));
+                if(row1.getChildCount() == row2.getChildCount()) {
+                    Toast.makeText(this, "ROW1", Toast.LENGTH_SHORT).show();
+                    row1.addView(device.getOverView(getLayoutInflater()));
+                } else {
+                    row2.addView(device.getOverView(getLayoutInflater()));
+                    Toast.makeText(this, "ROW2", Toast.LENGTH_SHORT).show();
+                }
             }
             Log.d("Aktualisieren", set[i].toString());
         }
 
-        CommandHelper.parse(list);
+        //CommandHelper.parse(list);
     }
 
 

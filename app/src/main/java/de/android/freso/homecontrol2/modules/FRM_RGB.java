@@ -124,7 +124,7 @@ public class FRM_RGB extends FhemModul {
 
 
 
-    public View getCard(LayoutInflater inflater) {
+    public View getDetailView(LayoutInflater inflater) {
         View v = inflater.inflate(R.layout.cardviews, null);
 
         Card card = new Card(context);
@@ -306,6 +306,21 @@ public class FRM_RGB extends FhemModul {
                 colorPicker.setColor(settings.getInt(KEY_COLOR_6, 0));
             }
         });
+
+        return v;
+    }
+
+    public View getOverView(LayoutInflater inflater) {
+        View v = inflater.inflate(R.layout.frm_rgb_card, null);
+
+//        Card card = new Card(context);
+//        CardHeader header = new CardHeader(context);
+//        card.addCardHeader(header);
+//
+//        CardView cardView = (CardView) v.findViewById(R.id.cardview);
+//        card.setInnerLayout(R.layout.frm_rgb_card);
+//
+//        cardView.setCard(card);
 
         return v;
     }
