@@ -1,9 +1,9 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">#009688</item>
+        <item name="colorPrimary">@color/indigo_500</item>
         <item name="actionBarStyle">@style/MyActionBar</item>
     </style>
 
@@ -15,7 +15,7 @@
 
     <style name="MyActionBar" parent="Widget.AppCompat.Light.ActionBar">
         <item name="titleTextStyle">@style/TitleTextStyle</item>
-        <item name="background">@color/material_deep_teal_500</item>
+        <item name="background">@color/indigo_500</item>
     </style>
 
 </resources>
