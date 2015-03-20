@@ -25,8 +25,8 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:label="MainActivity" >
-        </activity>
+            android:label="MainActivity    " >
+    </activity>
     </application>
 
-</manifest>
+    </manifest>
